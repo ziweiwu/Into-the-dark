@@ -1,0 +1,5 @@
+-x
+c++
+-D_GLIBCXX_DEBUG
+-Wall
+-std=c++11
