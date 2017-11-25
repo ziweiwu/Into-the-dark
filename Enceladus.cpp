@@ -27,6 +27,10 @@ Enceladus::~Enceladus() {}
                            Arrive
 ******************************************************************************/
 void Enceladus::arrive(ship* myship) {
+    myship->consume_fuel(get_fuelcost());
+    
+    if(myship->ran_out_fuel()){return;}
+    
     std::cout << std::endl;
     std::cout << "Frontier has arrived on Enceladus. " << std::endl;
     myship->consume_fuel(100);
@@ -41,16 +45,23 @@ void Enceladus::explore(ship* myship) {
     // explore
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "Explorative probe has landed on the surface of "
+    std::cout << "Explorative probe is heading toward "
               << get_name() <<"."<< std::endl;
     myship->consume_fuel(get_fuelcost());
+    
+    if (myship->ran_out_fuel()) {
+        return;
+    }
 
+    std::cout << "Explorative probe has landed on the surface of "
+              << get_name() <<"."<< std::endl;
+    
     int roll1 = 0;
     roll1 = rand() % (2) + 1;
 
     if (roll1 == 1) {
         std::cout<<"The crews discovered streams of water shooting up.\n";
-        std::cout<<"from the ground. Seems like a source of energy is  \n";
+        std::cout<<"from the ground. Seems like the source of energy is  \n";
         std::cout<<"beneath of the ground. The crews decided to explore\n";
         std::cout<<"beneath. An mysterious ruin appeared underground. \n";
         std::cout<<"There are signs of another civilization here \n";
@@ -58,7 +69,7 @@ void Enceladus::explore(ship* myship) {
         std::cout<<"are the traces of some bacteria. Suddenly, an ancient \n";
         std::cout<<"writing appeared on the wall. A sign language scientist \n";
         std::cout<<"is able to translate the writing: beware of the darkness, \n";
-        std::cout<<"but you must head into it. The key is the a matter of anti.\n";
+        std::cout<<"but you must head into it. The key is the matter of Anti.\n";
         return;
     }
 

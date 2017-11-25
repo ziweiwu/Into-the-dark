@@ -82,7 +82,7 @@ class ship {
     //helper functions
     bool antiParticles_isfull();
     bool fuelPacks_isfull();
-    
+    bool ran_out_fuel();
 };
 
 #endif

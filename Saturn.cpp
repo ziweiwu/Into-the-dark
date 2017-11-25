@@ -15,8 +15,8 @@ Saturn::Saturn() {
     set_description(
         "You have entered Saturn. A planet with "
         "beautiful planetary rings.");
-    set_fuelcost(100);
-    set_antiparticles(30);
+    set_fuelcost(120);
+    set_antiparticles(50);
     set_fuelpacks(30);
 }
 
@@ -29,6 +29,11 @@ Saturn::~Saturn() {}
                            Arrive
 ******************************************************************************/
 void Saturn::arrive(ship* myship) {
+    myship->consume_fuel(get_fuelcost());
+    
+    
+    if(myship->ran_out_fuel()){return;}
+    
     std::cout << std::endl;
     std::cout << "Frontier has arrived to Saturn. " << std::endl;
     myship->consume_fuel(100);
@@ -44,10 +49,14 @@ void Saturn::explore(ship* myship) {
 
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "Explorative probe heads toward"
+    std::cout << "Explorative probe is heading toward"
               << get_name() <<"."<< std::endl;
     myship->consume_fuel(get_fuelcost());
 
+    if (myship->ran_out_fuel()) {
+        return;
+    }
+   
     int roll1 = 0;
     roll1 = rand() % (3) + 1;
 
@@ -56,9 +65,13 @@ void Saturn::explore(ship* myship) {
         std::cout << "Probe detected the presence of anti-particles in the "
                      "planetary ring."
                   << std::endl;
+        
+        int extra_particles = 0;
+        extra_particles = rand() % (6) + 1;
 
-        std::cout << "5 anti-particles are found." << std::endl;
+        std::cout <<extra_particles<< " anti-particles are collected." << std::endl;
         myship->add_antiParticles(5);
+        set_antiparticles(get_antiparticles()-extra_particles);
     }
 
     // a chance to encounter comets and cause leaking fuel
@@ -71,6 +84,9 @@ void Saturn::explore(ship* myship) {
         std::cout << "Caused a leakage in fuel tank." << std::endl;
         myship->consume_fuel(100);
     }
+
+    std::cout << "Explorative probe has entered the atmosphere of "
+              << get_name() <<"."<< std::endl;
 
     // if anti-particles are available for gathering
     if (get_antiparticles() > 0) {

@@ -14,30 +14,33 @@
 *****************************************************************************/
 Menu::Menu() {
     set_quitGame(false);
-    set_survive(true);
 
     // initialize the ship and planets;
     ship myship;
 
-    // initialize the planets objects and link them
+    // initialize the planets objects 
     Mars mars1;
     Jupyter jupyter1;
     Saturn saturn1;
     Enceladus enceladus1;
-
+    Titan titan1;
     Blackhole blackhole1;
 
+    //links the planet objects
     mars1.set_right(&jupyter1);
     jupyter1.set_left(&mars1);
 
     jupyter1.set_right(&saturn1);
     saturn1.set_left(&jupyter1);
 
-    saturn1.set_right(&blackhole1);
-    blackhole1.set_left(&saturn1);
-
     saturn1.set_down(&enceladus1);
     enceladus1.set_up(&saturn1);
+
+    saturn1.set_up(&titan1);
+    titan1.set_down(&saturn1);
+
+    titan1.set_up(&blackhole1);
+    blackhole1.set_down(&titan1);
 
     // set the current location;
     currentLocation = &mars1;
@@ -63,12 +66,10 @@ Menu::~Menu() {}
 *****************************************************************************/
 void Menu::set_quitGame(bool flag) { quitGame = flag; }
 
-void Menu::set_survive(bool flag) { survive = flag; }
 
 /*****************************************************************************
                         get functions
 *****************************************************************************/
-bool Menu::get_survive() { return survive; }
 bool Menu::get_quitGame() { return quitGame; }
 
 /*****************************************************************************
@@ -126,34 +127,49 @@ void Menu::start_menu() {
         set_quitGame(true);
         return;
     }
-    
-    //display the background story 
-    std::cout<<std::endl; 
-    std::cout<<std::endl; 
-    std::cout<<"-----------------------------------------------------------"<<std::endl;
-    std::cout<<"                           Prologue                       "<<std::endl;
-    std::cout<<std::endl; 
-    std::cout<<"In 2030, the advance in technology has caused a singularity."<<std::endl;
-    std::cout<<"A point of no return such that artificial intelligence has "<<std::endl;
-    std::cout<<"surpassed human intelligence. Human are solely dependent on"<<std::endl;
-    std::cout<<"AI to make decisions for them. Human distinction are approaching"<<std::endl;
-    std::cout<<"as AI no longer depends on human. A group of scientist has "<<std::endl;
-    std::cout<<"embarked on a journey to restore the humanity by seeking a  "<<std::endl;
-    std::cout<<"a new planet in the universe. They have detected signals"<<std::endl;
-    std::cout<<"of a emergying wormhole. Passage through it might be"<<std::endl;
-    std::cout<<"their only hope to find a new home... "<<std::endl;
-    std::cout<<"-----------------------------------------------------------"<<std::endl;
-    std::cout<<std::endl; 
-    std::cout<<"Frontier is the spaceship for the mission, it was launched just"<<std::endl;
-    std::cout<<"before the AI could take control of it. This is a mission of"<<std::endl;
-    std::cout<<"no return. The first destination is the red planet Mars."<<std::endl;
+
+    // display the background story
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "-----------------------------------------------------------"
+              << std::endl;
+    std::cout << "                           Prologue                       "
+              << std::endl;
+    std::cout << std::endl;
+    std::cout << "In 2030, the advance in technology has caused a singularity."
+              << std::endl;
+    std::cout << "A point of no return such that artificial intelligence has "
+              << std::endl;
+    std::cout << "surpassed human intelligence. Human are solely dependent on"
+              << std::endl;
+    std::cout
+        << "AI to make decisions for them. Human distinction are approaching"
+        << std::endl;
+    std::cout << "as AI no longer depends on human. A group of scientist has "
+              << std::endl;
+    std::cout << "embarked on a journey to restore the humanity by seeking a  "
+              << std::endl;
+    std::cout << "a new planet in the universe. They have detected signals"
+              << std::endl;
+    std::cout << "of a emergying worm hole. Passage through it might be"
+              << std::endl;
+    std::cout << "their only hope to find a new home... " << std::endl;
+    std::cout << "-----------------------------------------------------------"
+              << std::endl;
+    std::cout << std::endl;
+    std::cout
+        << "Frontier is the spaceship for the mission, it was launched just"
+        << std::endl;
+    std::cout << "before the AI could take control of it. This is a mission of"
+              << std::endl;
+    std::cout << "no return. The first destination is the red planet Mars."
+              << std::endl;
 }
 
 /*****************************************************************************
  *                               planet_menu
  *****************************************************************************/
 void Menu::planet_menu(Space* planet, ship* myship) {
-    
     int choice1;
     while (myship->get_crews() > 0 && myship->get_fuel() > 0) {
         std::cout << std::endl;
@@ -166,52 +182,54 @@ void Menu::planet_menu(Space* planet, ship* myship) {
         myship->display_status();
 
         // display menu options;
-        std::cout << "1. Explore the planet."
-                  << "(fuelcost: " << planet->get_fuelcost() << ")"
+        std::cout << "1. Explore " << planet->get_name()
+                  << " (fuelcost: " << planet->get_fuelcost() << ")"
                   << std::endl;
         std::cout << "2. Use fuel packs." << std::endl;
-        std::cout << "3. Create anti-matter." << std::endl;
+        std::cout << "3. Use the particles accelerator." << std::endl;
 
         // options to travels to other planets or satellite
         if (planet->get_right() != nullptr) {
-            std::cout << "4. head to " << (planet->get_right())->get_name()
-                      << "(fuelcost: " << (planet->get_right())->get_fuelcost()
+            std::cout << "4. Head to " << (planet->get_right())->get_name()
+                      << " (fuelcost: " << (planet->get_right())->get_fuelcost()
                       << ")" << std::endl;
         } else {
             std::cout << "4. No destination available." << std::endl;
         }
         if (planet->get_left() != nullptr) {
-            std::cout << "5. head to " << (planet->get_left())->get_name()
-                      << "(fuelcost: " << (planet->get_left())->get_fuelcost()
+            std::cout << "5. Head to " << (planet->get_left())->get_name()
+                      << " (fuelcost: " << (planet->get_left())->get_fuelcost()
                       << ")" << std::endl;
         } else {
             std::cout << "5. No destination available." << std::endl;
         }
         if (planet->get_up() != nullptr) {
-            std::cout << "6. head to " << (planet->get_up())->get_name()
-                      << "(fuelcost: " << (planet->get_up())->get_fuelcost()
+            std::cout << "6. Head to " << (planet->get_up())->get_name()
+                      << " (fuelcost: " << (planet->get_up())->get_fuelcost()
                       << ")" << std::endl;
         } else {
             std::cout << "6. No destination available." << std::endl;
         }
 
         if (planet->get_down() != nullptr) {
-            std::cout << "7. head to " << (planet->get_down())->get_name()
-                      << "(. fuelcost: " << (planet->get_down())->get_fuelcost()
+            std::cout << "7. Head to " << (planet->get_down())->get_name()
+                      << " (fuelcost: " << (planet->get_down())->get_fuelcost()
                       << ")" << std::endl;
         } else {
             std::cout << "7. No destination available." << std::endl;
         }
+        std::cout << "8. Abort mission." << std::endl;
+
         std::cout << std::endl;
         do {
             std::cout << "Enter your choice ";
             std::cin >> choice1;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            if (choice1 < 1 || choice1 > 7) {
+            if (choice1 < 1 || choice1 > 8) {
                 std::cout << "Invalid input. Please try again: ";
             }
-        } while (choice1 < 1 || choice1 > 7);
+        } while (choice1 < 1 || choice1 > 8);
 
         // if user would like explore the planet
         if (choice1 == 1) {
@@ -262,6 +280,27 @@ void Menu::planet_menu(Space* planet, ship* myship) {
                 std::cout << "Invalid input." << std::endl;
             }
         }
+        if (choice1 == 8) {
+            int choice2 = 0;
+            std::cout << "Are you sure you want to give up the mission?"
+                      << std::endl;
+            std::cout << "1. Yes" << std::endl;
+            std::cout << "2. No" << std::endl;
+            do {
+                std::cin >> choice2;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
+                                '\n');
+                if (choice2 < 1 || choice2 > 2) {
+                    std::cout << "Invalid input. Please try again: ";
+                }
+            } while (choice2 < 1 || choice2 > 2);
+
+            if (choice2 == 1) {
+                std::cout<<"Mission aborted."<<std::endl;
+                return;
+            }
+        }
     }
 
     std::cout << std::endl;
@@ -276,8 +315,11 @@ void Menu::draw_map(Space* planet) {
 
     std::cout << "----------------------------------------------------------"
               << std::endl;
-    std::cout << "                    map                                    "
+    std::cout << "                    Map                                    "
               << std::endl;
+    std::cout<<std::endl;
+
+    // check if up has a planet
     if (planet->get_up() != nullptr) {
         std::cout << std::right << std::setw(20)
                   << (planet->get_up())->get_name() << std::endl;
@@ -301,7 +343,8 @@ void Menu::draw_map(Space* planet) {
     } else {
         std::cout << std::endl;
     }
-
+    
+    // check if down has a planet
     if (planet->get_down() != nullptr) {
         std::cout << std::right << std::setw(16) << " |" << std::endl;
         std::cout << std::right << std::setw(16) << " |" << std::endl;
@@ -309,4 +352,5 @@ void Menu::draw_map(Space* planet) {
         std::cout << std::right << std::setw(20)
                   << (planet->get_down())->get_name() << std::endl;
     }
+    std::cout<<std::endl;
 }

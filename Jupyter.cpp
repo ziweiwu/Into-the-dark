@@ -15,7 +15,7 @@ Jupyter::Jupyter() {
     set_description(
         "You have entered Jupyter. A gigantic planet that's made of hydrogen "
         "and helium gas.");
-    set_fuelcost(100);
+    set_fuelcost(130);
     set_antiparticles(60);
     set_fuelpacks(60);
 }
@@ -29,10 +29,15 @@ Jupyter::~Jupyter() {}
                            Arrive
 ******************************************************************************/
 void Jupyter::arrive(ship* myship) {
+    myship->consume_fuel(get_fuelcost());
+
+    if (myship->ran_out_fuel()) {
+        return;
+    }
+
     std::cout << std::endl;
-    std::cout << "Frontier has arrived to Jupyter. " << std::endl;
-    myship->consume_fuel(100);
-    std::cout << "Gravitional wave detector senses a strong magnetic storm."
+    std::cout << "Frontier has arrived to " << get_name() << "." << std::endl;
+    std::cout << "A violent magnetic storm is gathering on Jupyter."
               << std::endl;
 }
 
@@ -42,10 +47,19 @@ void Jupyter::arrive(ship* myship) {
 void Jupyter::explore(ship* myship) {
     // consume the fuel cost
     std::cout
-        << "Explorative probe is diving deep into the atmosphere of Jupiter"
+        << "Explorative probe is heading toward "<<get_name()
         << std::endl;
-    myship->consume_fuel(get_fuelcost());
 
+    myship->consume_fuel(get_fuelcost());
+   
+    if (myship->ran_out_fuel()) {
+        return;
+    }
+    
+    std::cout
+        << "Explorative probe is diving into the atmosphere of Jupiter"
+        << std::endl;
+    
     int roll1 = 0;
     roll1 = rand() % (3) + 1;
 

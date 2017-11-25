@@ -17,6 +17,7 @@
 #include "Mars.hpp"
 #include "Saturn.hpp"
 #include "Enceladus.hpp"
+#include "Titan.hpp"
 #include "black_hole.hpp"
 
 class Menu {
@@ -32,17 +33,12 @@ class Menu {
     Menu();   // constructor
     ~Menu();  // destructor
 
-    // set functions 
-    void set_survive(bool);
+    // set function 
     void set_quitGame(bool);
-    void set_missionComplete(bool);
-
-   
-    // get functions
-    bool get_survive();
+    
+    // get function
     bool get_quitGame();
-    bool get_mission_complete;
-
+    
     // member function
     void start_menu();
     void planet_menu(Space*, ship*);

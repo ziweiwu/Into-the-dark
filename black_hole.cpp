@@ -63,10 +63,13 @@ void Blackhole::explore(ship *myship) {
         if(choice ==1){
         std::cout <<"The ship is wrapped inside the anti-matter "<<std::endl;
         std::cout<<"Time and space are twisted outside of ship. Suddenly "<<std::endl;
+        std::cout<<"You don't know how long the time has passed. "<<std::endl;
         std::cout<<"the darkness becomes the shinning light..."<<std::endl;
-        std::cout<<"Outside the cabinate window, you see the clouds and bluesky."<<std::endl;
+        std::cout<<"Outside the cabinate window, you see the clouds and blue sky."<<std::endl;
         std::cout<<"You started to wonder what just happened..."<<std::endl;
-        
+
+        std::cout<<std::endl;
+        std::cout<<"Congratulations. You have completed the mission." <<std::endl;
         //mission is completed, the ship went through black hole
         //used it as a worm hole to another universe where
         //the hip landed on another human livable planet. 

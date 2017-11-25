@@ -148,7 +148,7 @@ void ship::use_fuelPacks() {
     // recovery the fuel using fuel packs
     set_fuelPacks(get_fuelPacks() - quantity);
     int fuelRecovery = quantity * 20;
-    std::cout << fuelRecovery << " fuel is being added." << std::endl;
+    std::cout << fuelRecovery << " fuel is added." << std::endl;
 
     if (fuelRecovery + get_fuel() > get_fuel_tank()) {
         set_fuel(2000);
@@ -217,5 +217,17 @@ void ship::consume_fuel(int fuel_cost) {
     }
 
     set_fuel(get_fuel() - fuel_cost);
-    std::cout << fuel_cost << " of fuel has been consumed" << std::endl;
+    std::cout << fuel_cost << " of fuel has been consumed." << std::endl;
 }
+
+
+/*****************************************************************************
+                     run_out_fuel
+*****************************************************************************/
+bool ship::ran_out_fuel(){
+    if(get_fuel()<=0){
+       return true;
+       }
+    return false;
+}
+
