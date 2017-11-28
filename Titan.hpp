@@ -10,9 +10,6 @@
 #include "Space.hpp"
 
 class Titan : public ::Space {
-   private:
-       bool alien_offer_accepted;
-
    public:
     // constructors and destructor
     Titan();           // constructor

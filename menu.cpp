@@ -15,18 +15,18 @@
 Menu::Menu() {
     set_quitGame(false);
 
-    // initialize the ship and planets;
+    // initialize the ship
     ship myship;
 
-    // initialize the planets objects 
+    // initialize the planets objects
     Mars mars1;
-    Jupyter jupyter1;
+    Jupiter jupyter1;
     Saturn saturn1;
     Enceladus enceladus1;
     Titan titan1;
     Blackhole blackhole1;
 
-    //links the planet objects
+    // links the planet objects
     mars1.set_right(&jupyter1);
     jupyter1.set_left(&mars1);
 
@@ -42,16 +42,16 @@ Menu::Menu() {
     titan1.set_up(&blackhole1);
     blackhole1.set_down(&titan1);
 
-    // set the current location;
-    currentLocation = &mars1;
-
     start_menu();
+
     // if players wants to quit the game
     if (quitGame) {
         return;
     }
 
     // start the game
+    currentLocation = &mars1;          // set current location
+    currentLocation->arrive(&myship);  // arive at mars
     planet_menu(currentLocation, &myship);
 
     return;
@@ -66,7 +66,6 @@ Menu::~Menu() {}
 *****************************************************************************/
 void Menu::set_quitGame(bool flag) { quitGame = flag; }
 
-
 /*****************************************************************************
                         get functions
 *****************************************************************************/
@@ -79,7 +78,6 @@ void Menu::start_menu() {
     int choice1 = 0;
 
     // Show the starting menu
-    std::cout << std::endl;
     std::cout << std::endl;
 
     // Display an title art to the screen.
@@ -129,8 +127,6 @@ void Menu::start_menu() {
     }
 
     // display the background story
-    std::cout << std::endl;
-    std::cout << std::endl;
     std::cout << "-----------------------------------------------------------"
               << std::endl;
     std::cout << "                           Prologue                       "
@@ -173,22 +169,23 @@ void Menu::planet_menu(Space* planet, ship* myship) {
     int choice1;
     while (myship->get_crews() > 0 && myship->get_fuel() > 0) {
         std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << std::endl;
         // display the map
         draw_map(planet);
 
         // display the ship status
         myship->display_status();
 
-        // display menu options;
+        /********************************************************************
+        ** Display menu selections
+        *********************************************************************/
+        // basic options
         std::cout << "1. Explore " << planet->get_name()
                   << " (fuelcost: " << planet->get_fuelcost() << ")"
                   << std::endl;
         std::cout << "2. Use fuel packs." << std::endl;
         std::cout << "3. Use the particles accelerator." << std::endl;
 
-        // options to travels to other planets or satellite
+        // options to travels
         if (planet->get_right() != nullptr) {
             std::cout << "4. Head to " << (planet->get_right())->get_name()
                       << " (fuelcost: " << (planet->get_right())->get_fuelcost()
@@ -219,8 +216,8 @@ void Menu::planet_menu(Space* planet, ship* myship) {
             std::cout << "7. No destination available." << std::endl;
         }
         std::cout << "8. Abort mission." << std::endl;
-
         std::cout << std::endl;
+
         do {
             std::cout << "Enter your choice ";
             std::cin >> choice1;
@@ -297,27 +294,25 @@ void Menu::planet_menu(Space* planet, ship* myship) {
             } while (choice2 < 1 || choice2 > 2);
 
             if (choice2 == 1) {
-                std::cout<<"Mission aborted."<<std::endl;
+                std::cout << "Mission aborted." << std::endl;
                 return;
             }
         }
     }
 
     std::cout << std::endl;
-    std::cout << "Game over. Missioned failed." << std::endl;
+    std::cout << "Game over. Mission failed." << std::endl;
 }
 
 /*****************************************************************************
  *                               draw_map
  *****************************************************************************/
 void Menu::draw_map(Space* planet) {
-    // check if left has a planet
-
     std::cout << "----------------------------------------------------------"
               << std::endl;
     std::cout << "                    Map                                    "
               << std::endl;
-    std::cout<<std::endl;
+    std::cout << std::endl;
 
     // check if up has a planet
     if (planet->get_up() != nullptr) {
@@ -343,7 +338,7 @@ void Menu::draw_map(Space* planet) {
     } else {
         std::cout << std::endl;
     }
-    
+
     // check if down has a planet
     if (planet->get_down() != nullptr) {
         std::cout << std::right << std::setw(16) << " |" << std::endl;
@@ -352,5 +347,5 @@ void Menu::draw_map(Space* planet) {
         std::cout << std::right << std::setw(20)
                   << (planet->get_down())->get_name() << std::endl;
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
 }

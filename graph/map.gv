@@ -1,0 +1,11 @@
+graph {
+node [shape=circle,fixedsize=true, width=1]
+    Mars -- Jupyter;
+    Jupyter -- Saturn;
+    Saturn -- Enceladus;
+Saturn -- Titan
+    Titan -- Blackhole;
+label="Planets Map"
+
+layout = "circo"
+}

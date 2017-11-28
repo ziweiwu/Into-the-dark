@@ -2,8 +2,13 @@
 ** program name: Space.cpp
 ** author: Wu, Ziwei
 ** date: 2017-10-25
-** description: an header file for class Space. It includes the
+** description: an implementation file for class Space. It includes the
    a default constructor, a copy constructor and a destructor. It includes
+   member variables name, description, fuelCost, antiParticles_available;
+   fuelPacks_available. Four pointers variables that specify the connection
+   that the space has including up, down, left and right. Set and get
+   functions for each of the variables. Two pure abstract virutal functions
+   arrive and explore.
 *****************************************************************************/
 #include "Space.hpp"
 
@@ -31,26 +36,15 @@ Space::~Space() {}
 /*****************************************************************************
  *                          set functions
  *****************************************************************************/
-void Space::set_name(std::string name1) { name = name1; }
-
-void Space::set_description(std::string descriptions1) {
-    description = descriptions1;
-}
-
-void Space::set_fuelcost(int fuelcost1) { explore_fuelcost = fuelcost1; }
-
-void Space::set_antiparticles(int n_antiparticles) {
-    num_antiparticles = n_antiparticles;
-}
-
-void Space::set_fuelpacks(int n_fuelpacks) { num_fuelpacks = n_fuelpacks; }
+void Space::set_name(std::string n) { name = n; }
+void Space::set_description(std::string d) { description = d; }
+void Space::set_fuelcost(int fc) { fuelCost = fc; }
+void Space::set_antiparticles(int p) { antiParticles_available = p; }
+void Space::set_fuelpacks(int fp) { fuelPacks_available = fp; }
 
 void Space::set_left(Space* l) { left = l; }
-
 void Space::set_right(Space* r) { right = r; }
-
 void Space::set_up(Space* u) { up = u; }
-
 void Space::set_down(Space* d) { down = d; }
 
 /*****************************************************************************
@@ -58,9 +52,9 @@ void Space::set_down(Space* d) { down = d; }
  *****************************************************************************/
 std::string Space::get_name() { return name; }
 std::string Space::get_description() { return description; }
-int Space::get_fuelcost() { return explore_fuelcost; }
-int Space::get_antiparticles() { return num_antiparticles; }
-int Space::get_fuelpacks() { return num_fuelpacks; }
+int Space::get_fuelcost() { return fuelCost; }
+int Space::get_antiparticles() { return antiParticles_available; }
+int Space::get_fuelpacks() { return fuelPacks_available; }
 
 Space* Space::get_left() { return left; }
 Space* Space::get_right() { return right; }

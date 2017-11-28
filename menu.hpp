@@ -13,7 +13,7 @@
 #include <vector>
 #include "ship.hpp"
 #include "Space.hpp"
-#include "Jupyter.hpp"
+#include "Jupiter.hpp"
 #include "Mars.hpp"
 #include "Saturn.hpp"
 #include "Enceladus.hpp"
@@ -23,10 +23,7 @@
 class Menu {
    private:
     Space* currentLocation;
-    
-    bool survive; 
     bool quitGame;
-    bool mission_complete; 
 
    public:
     // constructors and destructor

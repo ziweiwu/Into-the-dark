@@ -34,7 +34,8 @@ void Titan::arrive(ship* myship) {
         return;
     }
 
-    std::cout << std::endl;
+    std::cout << "-----------------------------------------------------------"
+              << std::endl;
     std::cout << "Frontier has arrived on Titan. " << std::endl;
     myship->consume_fuel(100);
     std::cout << "Warning: large gravitational wave detected." << std::endl;
@@ -48,7 +49,7 @@ void Titan::arrive(ship* myship) {
         << std::endl;
 
     // The connection between Titan and Saturn is lost
-    // There is no escape
+    // Once the player arrives due to strong gravity pull
     get_down()->set_up(nullptr);
     set_down(nullptr);
 }
@@ -61,8 +62,8 @@ void Titan::explore(ship* myship) {
     std::cout << std::endl;
     std::cout << std::endl;
 
-    std::cout << "Explorative probe is heading toward the surface of " << get_name()
-              << "." << std::endl;
+    std::cout << "Explorative probe is heading toward the surface of "
+              << get_name() << "." << std::endl;
     myship->consume_fuel(get_fuelcost());
 
     if (myship->ran_out_fuel()) {
@@ -129,40 +130,34 @@ void Titan::explore(ship* myship) {
         std::cin >> choice;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        if (choice != 1 && choice != 2) {
+        if (choice < 1 || choice > 2) {
             std::cout << "invalid input. please try again: ";
         }
-    } while (choice != 1 && choice != 2);
+    } while (choice < 1 || choice > 2);
 
     if (choice == 1) {
-        std::cin >> choice;
         std::cout << "Year 2050, AI are completely eradicted. Total human "
-                     "population has restored"
+                     "population has restored to 10 billion. "
                   << std::endl;
-        std::cout << "to 10 billion. Cities are more technological advanced than ever before."
+        std::cout << "Cities are more technological advanced than ever before."
                   << std::endl;
-        std::cout << "However, human have lost the ability to "
-                     "communciate verbally."
-                  << std::endl;
+        std::cout
+            << "However, human have lost the ability to communciate verbally."
+            << std::endl;
         std::cout << "All communications are perform through quantum-coupling. "
-                     "There are no lies"
                   << std::endl;
-        std::cout << "can be told because every single person's mental "
-                     "activities are connected"
+        std::cout << "No lies can be told because everyone's mind activites "
+                     "are all connected"
                   << std::endl;
-        std::cout << "to each other at all times regardless of physical "
-                     "distance."<<std::endl;
-        std::cout<<std::endl;
-        std::cout << "Human society has formed a inverted-tree like structure. And at the single "
-                     "top root of tree "
+        std::cout << std::endl;
+        std::cout << "Human society has formed a tree like network structure. "
                   << std::endl;
-        std::cout << "there is a supermeme being watching everything..."
+        std::cout << "And at the single top root of tree " << std::endl;
+        std::cout << "There is a supermeme being watching everything..."
                   << std::endl;
         std::cout << std::endl;
         std::cout << "Thanks for playing." << std::endl;
         myship->set_crews(1000);
         return;
     }
-
-    return;
 }

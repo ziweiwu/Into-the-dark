@@ -1,19 +1,19 @@
 /*****************************************************************************
-** program name: Jupyter.hpp
+** program name: Jupiter.hpp
 ** author: Wu, Ziwei
 ** date: 2017-12-22
-** description: an implementation file for class Jupyter. It inherits from the
+** description: an implementation file for class Jupiter. It inherits from the
 the Space class.
 *****************************************************************************/
-#include "Jupyter.hpp"
+#include "Jupiter.hpp"
 
 /*****************************************************************************
                            Constructor
  *****************************************************************************/
-Jupyter::Jupyter() {
-    set_name("Jupyter");
+Jupiter::Jupiter() {
+    set_name("Jupiter");
     set_description(
-        "You have entered Jupyter. A gigantic planet that's made of hydrogen "
+        "You have entered Jupiter. A gigantic planet that's made of hydrogen "
         "and helium gas.");
     set_fuelcost(130);
     set_antiparticles(60);
@@ -23,28 +23,29 @@ Jupyter::Jupyter() {
 /*****************************************************************************
                            Destructor
 ******************************************************************************/
-Jupyter::~Jupyter() {}
+Jupiter::~Jupiter() {}
 
 /*****************************************************************************
                            Arrive
 ******************************************************************************/
-void Jupyter::arrive(ship* myship) {
+void Jupiter::arrive(ship* myship) {
     myship->consume_fuel(get_fuelcost());
 
     if (myship->ran_out_fuel()) {
         return;
     }
 
-    std::cout << std::endl;
+    std::cout << "-----------------------------------------------------------"
+              << std::endl;
     std::cout << "Frontier has arrived to " << get_name() << "." << std::endl;
-    std::cout << "A violent magnetic storm is gathering on Jupyter."
+    std::cout << "A violent magnetic storm is gathering on Jupiter."
               << std::endl;
 }
 
 /*****************************************************************************
                            explore
 ******************************************************************************/
-void Jupyter::explore(ship* myship) {
+void Jupiter::explore(ship* myship) {
     // consume the fuel cost
     std::cout
         << "Explorative probe is heading toward "<<get_name()
@@ -70,7 +71,7 @@ void Jupyter::explore(ship* myship) {
             << std::endl;
         if (myship->get_crews() - 10 <= 0) {
             myship->set_crews(0);
-            std::cout << "All crew are losts." << std::endl;
+            std::cout << "All crew are lost." << std::endl;
         } else {
             myship->set_crews(myship->get_crews() - 10);
             std::cout << "Lost 10 crews." << std::endl;

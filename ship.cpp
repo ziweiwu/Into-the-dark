@@ -16,13 +16,13 @@ ship::ship() {
         "An advanced ship that's designd primarily for space"
         " exploration. It's equipped with a explore craft, a gravitional"
         " wave detector, and a particle accelerator");
-    set_fuel(1000);
+    set_fuel(1600);
     set_fuel_tank(2000);
     set_antiParticlesCapacity(200);
     set_fuelPacksCapacity(100);
     set_crews(100);
-    
-    set_fuelPacks(20);
+
+    set_fuelPacks(50);
     set_antiParticles(0);
 
     set_antiMatter_created(false);
@@ -90,7 +90,7 @@ void ship::add_antiParticles(int quantity) {
                     antiParticles_isfull
 *****************************************************************************/
 bool ship::antiParticles_isfull() {
-    if (get_antiParticles() >= get_antiParticlesCapacity()){
+    if (get_antiParticles() >= get_antiParticlesCapacity()) {
         return true;
     }
     return false;
@@ -115,7 +115,8 @@ void ship::add_fuelPacks(int quantity) {
 *****************************************************************************/
 bool ship::fuelPacks_isfull() {
     if (get_fuelPacks() >= get_fuelPacksCapacity()) {
-        return true; }
+        return true;
+    }
     return false;
 }
 
@@ -123,7 +124,7 @@ bool ship::fuelPacks_isfull() {
                          use_fuelPacks
 *****************************************************************************/
 void ship::use_fuelPacks() {
-    //check if fuel pack is available
+    // check if fuel pack is available
     if (get_fuelPacks() <= 0) {
         std::cout << "No more fuel packs left." << std::endl;
         return;
@@ -144,7 +145,7 @@ void ship::use_fuelPacks() {
             std::cout << "Invalid input. Please try again: ";
         }
     } while (quantity < 0 || quantity > get_fuelPacks() || notInt);
-    
+
     // recovery the fuel using fuel packs
     set_fuelPacks(get_fuelPacks() - quantity);
     int fuelRecovery = quantity * 20;
@@ -157,7 +158,8 @@ void ship::use_fuelPacks() {
         set_fuel(get_fuel() + fuelRecovery);
     }
     // display the current fuel level
-    std::cout<<"Current fuel: "<<get_fuel()<<"/"<<get_fuel_tank()<<std::endl;
+    std::cout << "Current fuel: " << get_fuel() << "/" << get_fuel_tank()
+              << std::endl;
 }
 
 /*****************************************************************************
@@ -165,8 +167,7 @@ void ship::use_fuelPacks() {
 *****************************************************************************/
 void ship::create_antiMatter() {
     if (get_antiParticles() >= 100) {
-
-        set_antiParticles(get_antiParticles()-100);
+        set_antiParticles(get_antiParticles() - 100);
 
         std::cout << "Particle accelerator ejected 100 anti-particles"
                   << std::endl;
@@ -192,13 +193,15 @@ void ship::display_status() {
               << std::endl;
     std::cout << "         Frontier central monitor panel           "
               << std::endl;
-    std::cout<<std::endl;
+    std::cout << std::endl;
     std::cout << "         Crew members  : " << get_crews() << std::endl;
-    std::cout << "         Fuel          : " << get_fuel() << "/" << get_fuel_tank() << std::endl;
-    std::cout << "         Anti-particles: " << get_antiParticles() << std::endl;
+    std::cout << "         Fuel          : " << get_fuel() << "/"
+              << get_fuel_tank() << std::endl;
+    std::cout << "         Anti-particles: " << get_antiParticles()
+              << std::endl;
     std::cout << "         Fuel packs    : " << get_fuelPacks() << std::endl;
     if (get_antiMatter_created()) {
-    std::cout << "         Anti-matter   : Created" << std::endl;
+        std::cout << "         Anti-matter   : Created" << std::endl;
     }
 
     std::cout << "----------------------------------------------------------"
@@ -220,14 +223,12 @@ void ship::consume_fuel(int fuel_cost) {
     std::cout << fuel_cost << " of fuel has been consumed." << std::endl;
 }
 
-
 /*****************************************************************************
                      run_out_fuel
 *****************************************************************************/
-bool ship::ran_out_fuel(){
-    if(get_fuel()<=0){
-       return true;
-       }
+bool ship::ran_out_fuel() {
+    if (get_fuel() <= 0) {
+        return true;
+    }
     return false;
 }
-

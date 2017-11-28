@@ -19,12 +19,12 @@ class ship {
     // member variables
     std::string name;  
     std::string description;
+    int crews;
     int fuel;
     int fuel_tank;
-    int crews;
     int fuelPacks;
-    int antiParticles;
     int fuelPacks_capacity;
+    int antiParticles;
     int antiParticles_capacity;
     bool antiMatter_created; 
 
