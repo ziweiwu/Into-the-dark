@@ -1,7 +1,7 @@
 /*****************************************************************************
 ** program name: Enceladus.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: an implementation file for class Enceladus. It inherits from the
 the Space class.
 *****************************************************************************/
@@ -25,10 +25,12 @@ Enceladus::~Enceladus() {}
 
 /*****************************************************************************
                            Arrive
+The arrive event for Enceladus                                                      
 ******************************************************************************/
 void Enceladus::arrive(ship* myship) {
+    
+    //pay the fuel cost
     myship->consume_fuel(get_fuelcost());
-
     if (myship->ran_out_fuel()) {
         return;
     }
@@ -43,6 +45,7 @@ void Enceladus::arrive(ship* myship) {
 
 /*****************************************************************************
                            explore
+The explore event for Enceladus                                                      
 ******************************************************************************/
 void Enceladus::explore(ship* myship) {
     // explore
@@ -59,8 +62,7 @@ void Enceladus::explore(ship* myship) {
     std::cout << "Explorative probe has landed on the surface of " << get_name()
               << "." << std::endl;
 
-    int roll1 = 0;
-    roll1 = rand() % (2) + 1;
+    int roll1 = rand() % (2) + 1;
 
     if (roll1 == 1) {
         std::cout << "The crews discovered streams of water shooting up\n";
@@ -99,8 +101,7 @@ void Enceladus::explore(ship* myship) {
 
     // if anti-particles are available for gathering
     if (get_antiparticles() > 0) {
-        int roll2 = 0;
-        roll2 = rand() % (10) + 2;
+        int roll2 = rand() % (10) + 2;
 
         std::cout << roll2 << " anti-particles are found." << std::endl;
         myship->add_antiParticles(roll2);
@@ -109,8 +110,7 @@ void Enceladus::explore(ship* myship) {
 
     // if fuel packss are available for gathering
     if (get_fuelpacks() > 0) {
-        int roll3 = 0;
-        roll3 = rand() % (10) + 2;
+        int roll3 = rand() % (10) + 2;
 
         std::cout << roll3 << " fuel packs are found." << std::endl;
         myship->add_fuelPacks(roll3);

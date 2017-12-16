@@ -1,20 +1,27 @@
 /*****************************************************************************
 ** program name: ship.cpp
 ** author: Wu, Ziwei
-** date: 2017-10-25
+** date: 2017-11-25
 ** description: an implementation file for class ship. It includes the
    a default constructor, a copy constructor and a destructor. It includes
+   member variables name, description, fuel, fuel_tank, fuelPacks,
+   fuelPacks_capacity, antiParticles, antiParticles_capacity,
+   antiMatter_created. Set and get methods for each of its variable.
+   Two vector container antParticles_storage and fuelPacks_storage. Member
+   functions include add_antiParticles, create_antiMatter, add_fuelPacks, 
+   consume_fuel, display_status. Helper functions include antiParticles_isfull
+   fuelPacks_isfull, and ran_out_fuel.
 *****************************************************************************/
 #include "ship.hpp"
 
 /*****************************************************************************
- *                          Constructor
- *****************************************************************************/
+                          Constructor
+*****************************************************************************/
 ship::ship() {
     set_name("Frontier");
     set_description(
-        "An advanced ship that's designd primarily for space"
-        " exploration. It's equipped with a explore craft, a gravitional"
+        "An advanced ship that's designed primarily for space"
+        " exploration. It's equipped with a explore craft, a gravitational"
         " wave detector, and a particle accelerator");
     set_fuel(1600);
     set_fuel_tank(2000);
@@ -30,7 +37,7 @@ ship::ship() {
 
 /*****************************************************************************
                            Destructor
- *****************************************************************************/
+*****************************************************************************/
 ship::~ship() {
     fuelPacks_storage.clear();
     antiParticles_storage.clear();
@@ -38,7 +45,7 @@ ship::~ship() {
 
 /*****************************************************************************
                           set functions
- *****************************************************************************/
+*****************************************************************************/
 void ship::set_name(std::string n) { name = n; }
 void ship::set_description(std::string d) { description = d; }
 void ship::set_fuel(int f) { fuel = f; }
@@ -46,15 +53,14 @@ void ship::set_fuel_tank(int ft) { fuel_tank = ft; }
 void ship::set_crews(int c) { crews = c; }
 
 void ship::set_antiParticles(int p) { antiParticles = p; }
-void ship::set_fuelPacks(int fp) { fuelPacks = fp; }
-
 void ship::set_antiParticlesCapacity(int c) { antiParticles_capacity = c; }
-void ship::set_fuelPacksCapacity(int c) { fuelPacks_capacity = c; }
-
 void ship::set_antiMatter_created(bool flag) { antiMatter_created = flag; }
 
+void ship::set_fuelPacks(int fp) { fuelPacks = fp; }
+void ship::set_fuelPacksCapacity(int c) { fuelPacks_capacity = c; }
+
 /*****************************************************************************
-                          get function
+                          get functions
  *****************************************************************************/
 std::string ship::get_name() { return name; }
 std::string ship::get_description() { return description; }
@@ -63,19 +69,20 @@ int ship::get_fuel_tank() { return fuel_tank; }
 int ship::get_crews() { return crews; }
 
 int ship::get_antiParticles() { return antiParticles; }
-int ship::get_fuelPacks() { return fuelPacks; }
-
 int ship::get_antiParticlesCapacity() { return antiParticles_capacity; }
-int ship::get_fuelPacksCapacity() { return fuelPacks_capacity; }
-
 bool ship::get_antiMatter_created() { return antiMatter_created; }
+
+int ship::get_fuelPacks() { return fuelPacks; }
+int ship::get_fuelPacksCapacity() { return fuelPacks_capacity; }
 
 /*****************************************************************************
                          add_antiParticles
+Add an anti-particle to the storage of the ship
 *****************************************************************************/
 void ship::add_antiParticles(int quantity) {
     std::cout << quantity << " anti-particles are being collected."
               << std::endl;
+
     for (int i = 0; i < quantity; i++) {
         if (antiParticles_isfull()) {
             std::cout << "Anti-particles chamber is full." << std::endl;
@@ -88,6 +95,7 @@ void ship::add_antiParticles(int quantity) {
 
 /*****************************************************************************
                     antiParticles_isfull
+check if the storage of anti-particles is full
 *****************************************************************************/
 bool ship::antiParticles_isfull() {
     if (get_antiParticles() >= get_antiParticlesCapacity()) {
@@ -95,11 +103,14 @@ bool ship::antiParticles_isfull() {
     }
     return false;
 }
+
 /*****************************************************************************
                          add_fuelPacks
+Add an fuel pack to storage of the ship
 *****************************************************************************/
 void ship::add_fuelPacks(int quantity) {
     std::cout << quantity << " fuelpacks are being collected." << std::endl;
+
     for (int i = 0; i < quantity; i++) {
         if (fuelPacks_isfull()) {
             std::cout << "Fuelpacks chamber is full." << std::endl;
@@ -112,6 +123,7 @@ void ship::add_fuelPacks(int quantity) {
 
 /*****************************************************************************
                     fuelPacks_isfull
+check if the storage of fuel pack is full
 *****************************************************************************/
 bool ship::fuelPacks_isfull() {
     if (get_fuelPacks() >= get_fuelPacksCapacity()) {
@@ -122,6 +134,7 @@ bool ship::fuelPacks_isfull() {
 
 /*****************************************************************************
                          use_fuelPacks
+use fuel packs to refill the fuel
 *****************************************************************************/
 void ship::use_fuelPacks() {
     // check if fuel pack is available
@@ -157,6 +170,7 @@ void ship::use_fuelPacks() {
     } else {
         set_fuel(get_fuel() + fuelRecovery);
     }
+
     // display the current fuel level
     std::cout << "Current fuel: " << get_fuel() << "/" << get_fuel_tank()
               << std::endl;
@@ -164,6 +178,7 @@ void ship::use_fuelPacks() {
 
 /*****************************************************************************
                       create_antiMatter
+Use the anti-particles to create anti-matter
 *****************************************************************************/
 void ship::create_antiMatter() {
     if (get_antiParticles() >= 100) {
@@ -186,6 +201,8 @@ void ship::create_antiMatter() {
 
 /*****************************************************************************
                      display_status
+Display the staus of ship including fuel level, crew, anti-particles
+and if anti matter has been created
 *****************************************************************************/
 void ship::display_status() {
     std::cout << std::endl;
@@ -211,6 +228,7 @@ void ship::display_status() {
 
 /*****************************************************************************
                      consume_fuel
+Use the fuel on the ship
 *****************************************************************************/
 void ship::consume_fuel(int fuel_cost) {
     if (get_fuel() - fuel_cost <= 0) {
@@ -225,6 +243,7 @@ void ship::consume_fuel(int fuel_cost) {
 
 /*****************************************************************************
                      run_out_fuel
+Check if the ship has ran out of fuel
 *****************************************************************************/
 bool ship::ran_out_fuel() {
     if (get_fuel() <= 0) {

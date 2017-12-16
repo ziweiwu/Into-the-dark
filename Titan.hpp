@@ -1,12 +1,12 @@
 /*****************************************************************************
 ** program name: Titan.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: a header file for class Titan. It inherits from the the
    Space class.
 *****************************************************************************/
-#ifndef Titan_hpp
-#define Titan_hpp
+#ifndef TITAN_HPP
+#define TITAN_HPP
 #include "Space.hpp"
 
 class Titan : public ::Space {
@@ -16,8 +16,8 @@ class Titan : public ::Space {
     virtual ~Titan();  // destructor
 
     // member functions
-    void arrive(ship*);
-    void explore(ship*);
+    void arrive(ship*) override;
+    void explore(ship*) override;
 };
 
 #endif

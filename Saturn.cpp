@@ -3,7 +3,7 @@
 ** author: Wu, Ziwei
 ** date: 2017-12-22
 ** description: an implementation file for class Saturn. It inherits from the
-the Space class.
+    the Space class.
 *****************************************************************************/
 #include "Saturn.hpp"
 
@@ -12,9 +12,7 @@ the Space class.
  *****************************************************************************/
 Saturn::Saturn() {
     set_name("Saturn");
-    set_description(
-        "You have entered Saturn. A planet with "
-        "beautiful planetary rings.");
+    set_description("A planet with a beautiful planetary rings.");
     set_fuelcost(120);
     set_antiparticles(50);
     set_fuelpacks(50);
@@ -26,11 +24,13 @@ Saturn::Saturn() {
 Saturn::~Saturn() {}
 
 /*****************************************************************************
-                           Arrive
+                           arrive
+Arrive event for Saturn
 ******************************************************************************/
 void Saturn::arrive(ship* myship) {
+    
+    //pay the fuel cost
     myship->consume_fuel(get_fuelcost());
-
     if (myship->ran_out_fuel()) {
         return;
     }
@@ -45,16 +45,16 @@ void Saturn::arrive(ship* myship) {
 
 /*****************************************************************************
                            explore
+Explore event for Saturn
 ******************************************************************************/
 void Saturn::explore(ship* myship) {
-    // consume the fuel cost
 
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Explorative probe is heading toward " << get_name() << "."
               << std::endl;
+    //pay the fuel cost
     myship->consume_fuel(get_fuelcost());
-
     if (myship->ran_out_fuel()) {
         return;
     }
@@ -79,8 +79,7 @@ void Saturn::explore(ship* myship) {
     **  Player decides to investigate the planetary ring
     *******************************************************************************/
     if (choice == 1) {
-        int roll1 = 0;
-        roll1 = rand() % (2) + 1;
+        int roll1 = rand() % (2) + 1;
 
         /***********************************************************************
         ** Bonus anti particles are found
@@ -92,8 +91,7 @@ void Saturn::explore(ship* myship) {
             std::cout << "Anti-particles are found in one of the comets."
                       << std::endl;
 
-            int extra_particles = 0;
-            extra_particles = rand() % (10) + 1;
+            int extra_particles = rand() % (10) + 1;
 
             std::cout << extra_particles << " anti-particles are collected."
                       << std::endl;
@@ -126,8 +124,7 @@ void Saturn::explore(ship* myship) {
     ***********************************************************************/
     // if anti-particles are available for gathering
     if (get_antiparticles() > 0) {
-        int roll2 = 0;
-        roll2 = rand() % (5) + 5;
+        int roll2 = rand() % (5) + 5;
 
         std::cout << roll2 << " anti-particles are found." << std::endl;
         myship->add_antiParticles(roll2);
@@ -136,8 +133,7 @@ void Saturn::explore(ship* myship) {
 
     // if fuel packss are available for gathering
     if (get_fuelpacks() > 0) {
-        int roll3 = 0;
-        roll3 = rand() % (5) + 5;
+        int roll3 = rand() % (5) + 5;
 
         std::cout << roll3 << " fuel packs are found." << std::endl;
         myship->add_fuelPacks(roll3);

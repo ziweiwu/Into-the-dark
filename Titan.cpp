@@ -1,7 +1,7 @@
 /*****************************************************************************
 ** program name: Titan.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: an implementation file for class Titan. It inherits from the
 the Space class.
 *****************************************************************************/
@@ -26,6 +26,7 @@ Titan::~Titan() {}
 
 /*****************************************************************************
                            Arrive
+The arrive event for Titan
 ******************************************************************************/
 void Titan::arrive(ship* myship) {
     myship->consume_fuel(get_fuelcost());
@@ -56,6 +57,7 @@ void Titan::arrive(ship* myship) {
 
 /*****************************************************************************
                            explore
+The explore event for Titan
 ******************************************************************************/
 void Titan::explore(ship* myship) {
     // explore
@@ -64,12 +66,16 @@ void Titan::explore(ship* myship) {
 
     std::cout << "Explorative probe is heading toward the surface of "
               << get_name() << "." << std::endl;
-    myship->consume_fuel(get_fuelcost());
 
+    //pay the fuel cost
+    myship->consume_fuel(get_fuelcost());
     if (myship->ran_out_fuel()) {
         return;
     }
 
+    /*********************************************************************
+    **Alien offer 
+    *********************************************************************/
     std::cout << "Explorative probe has landed on the surface of " << get_name()
               << "." << std::endl;
     std::cout << "The crew is tracking down the source of the strange signal."
@@ -135,6 +141,7 @@ void Titan::explore(ship* myship) {
         }
     } while (choice < 1 || choice > 2);
 
+    //accept the offer
     if (choice == 1) {
         std::cout << "Year 2050, AI are completely eradicted. Total human "
                      "population has restored to 10 billion. "
@@ -160,4 +167,24 @@ void Titan::explore(ship* myship) {
         myship->set_crews(1000);
         return;
     }
+    
+    //decline the offer 
+    std::cout <<"This is unfortunate, you human will perish!."<<std::endl;
+    std::cout <<"The alien uses psychic power to attack the crews."<<std::endl;
+
+    //if the ship has created anti-matter, alien will be defeated
+    if(myship->get_antiMatter_created()){
+        std::cout<<"What? You have anti-matter."<<std::endl;
+        std::cout<<"No, this is impossible."<<std::endl;
+        std::cout<<"The psychic power is repelled by anti-matter."<<std::endl;
+        std::cout<<"The alien has been perished by their own power."<<std::endl;
+        return;
+    }
+
+    //if the ship has no anti-matter, the crews will be killed.
+    else{
+        std::cout<<"All crews of the ship are killed by the psychic power"<<std::endl;
+        myship->set_crews(0);
+    }
+
 }

@@ -1,9 +1,9 @@
 /*****************************************************************************
 ** program name: Mars.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: an implementation file for class Mars. It inherits from the
-the Space class.
+   the Space class.
 *****************************************************************************/
 #include "Mars.hpp"
 
@@ -25,9 +25,12 @@ Mars::~Mars() {}
 
 /*****************************************************************************
                            Arrive
+The arrive event for Mars
 ******************************************************************************/
 void Mars::arrive(ship* myship) {
+    // pay the fuel cost
     myship->consume_fuel(get_fuelcost());
+    // if ran out of fuel
     if (myship->ran_out_fuel()) {
         return;
     }
@@ -35,13 +38,13 @@ void Mars::arrive(ship* myship) {
     std::cout << "-----------------------------------------------------------"
               << std::endl;
     std::cout << "Frontier has arrived to Mars. " << std::endl;
-    myship->consume_fuel(100);
     std::cout << "Bio-detector detects signs of extraterrestrial being."
               << std::endl;
 }
 
 /*****************************************************************************
                            explore
+The explore event for Mars
 ******************************************************************************/
 void Mars::explore(ship* myship) {
     std::cout << std::endl;
@@ -74,18 +77,16 @@ void Mars::explore(ship* myship) {
     } while (choice != 1 && choice != 2);
 
     /**********************************************************************
-    ** Player is curious and would like to investigate
+    ** Player would like to investigate
     ***********************************************************************/
     if (choice == 1) {
-        int roll1 = 0;
-        roll1 = rand() % (2) + 1;
+        int roll1 = rand() % (2) + 1;
 
         /**********************************************************************
         ** Meet the prophet (1/2 chance)
         ***********************************************************************/
         if (roll1 == 1) {
-            std::cout
-                << "Probe has reached the origin of life signal.\n";
+            std::cout << "Probe has reached the origin of life signal.\n";
             std::cout
                 << "Crew encounters a unknown being. A female humanoid like "
                    "being addressed in white robe.\n";
@@ -109,8 +110,7 @@ void Mars::explore(ship* myship) {
         ** Meet the predator (1/2 chance)
         ***********************************************************************/
         if (roll1 == 2) {
-            std::cout
-                << "Probe has reached the origin of life signal.\n";
+            std::cout << "Probe has reached the origin of life signal.\n";
             std::cout << "Crew encounters a unknown being. A gigantic creature "
                          "emerged from the ground.\n";
             std::cout << "The crew draw their weapons.\n";
@@ -131,7 +131,7 @@ void Mars::explore(ship* myship) {
         }
     }
     /**********************************************************************
-    ** Player will gather resource instead
+    ** Gather resources 
     ***********************************************************************/
     std::cout << "Probe is searching for the origin of life signal...\n";
     std::cout << "Probe is searching for the origin of life signal...\n";
@@ -139,8 +139,7 @@ void Mars::explore(ship* myship) {
 
     // if anti particles are available for gathering
     if (get_antiparticles() > 0) {
-        int roll2 = 0;
-        roll2 = rand() % (10) + 1;
+        int roll2 = rand() % (10) + 1;
 
         std::cout << roll2 << " anti-particles are found." << std::endl;
         myship->add_antiParticles(roll2);
@@ -149,8 +148,7 @@ void Mars::explore(ship* myship) {
 
     // if fuel packs are available for gathering
     if (get_fuelpacks() > 0) {
-        int roll3 = 0;
-        roll3 = rand() % (10) + 1;
+        int roll3 = rand() % (10) + 1;
 
         std::cout << roll3 << " fuelpacks are found." << std::endl;
         myship->add_fuelPacks(roll3);

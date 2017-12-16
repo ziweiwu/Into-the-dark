@@ -1,9 +1,11 @@
 /*****************************************************************************
 ** program name: menu.cpp
 ** author: Wu, Ziwei
-** date: 2017-10-25
-** description: a implementation file for class Menu. It has a constructor
-   which initialize the gameplay and a destructor. A member function fight
+** date: 2017-11-25
+** description: a implementation file for class Menu. It contains a constructor 
+    and a destructor. Member variables including currentLocation, quitGame.
+    Set and get function for quitGame. Member functions including start_menu
+    planet_menu, and draw_map. 
 *****************************************************************************/
 #include "menu.hpp"
 #include <fstream>
@@ -11,6 +13,7 @@
 
 /*****************************************************************************
                         Constructor
+Initialize the game play
 *****************************************************************************/
 Menu::Menu() {
     set_quitGame(false);
@@ -45,13 +48,13 @@ Menu::Menu() {
     start_menu();
 
     // if players wants to quit the game
-    if (quitGame) {
+    if (get_quitGame()) {
         return;
     }
 
     // start the game
     currentLocation = &mars1;          // set current location
-    currentLocation->arrive(&myship);  // arive at mars
+    currentLocation->arrive(&myship);  // arrive at mars
     planet_menu(currentLocation, &myship);
 
     return;
@@ -62,17 +65,18 @@ Menu::Menu() {
 Menu::~Menu() {}
 
 /*****************************************************************************
-                        Set functions
+                        Set function
 *****************************************************************************/
 void Menu::set_quitGame(bool flag) { quitGame = flag; }
 
 /*****************************************************************************
-                        get functions
+                        get function
 *****************************************************************************/
 bool Menu::get_quitGame() { return quitGame; }
 
 /*****************************************************************************
                         start_menu
+Display the start menu for the game
 *****************************************************************************/
 void Menu::start_menu() {
     int choice1 = 0;
@@ -93,7 +97,7 @@ void Menu::start_menu() {
 
     std::cout << "-------------------------------------------------------------"
               << std::endl;
-    // checks if art file can be openned
+    // checks if art file can be opened
     if (artFile.is_open()) {
         // draw the art to the screen
         std::string line;
@@ -147,7 +151,7 @@ void Menu::start_menu() {
               << std::endl;
     std::cout << "a new planet in the universe. They have detected signals"
               << std::endl;
-    std::cout << "of a emergying worm hole. Passage through it might be"
+    std::cout << "of an emerging worm hole. Passage through it might be"
               << std::endl;
     std::cout << "their only hope to find a new home... " << std::endl;
     std::cout << "-----------------------------------------------------------"
@@ -163,7 +167,8 @@ void Menu::start_menu() {
 }
 
 /*****************************************************************************
- *                               planet_menu
+                              planet_menu
+ Display planet options 
  *****************************************************************************/
 void Menu::planet_menu(Space* planet, ship* myship) {
     int choice1;
@@ -305,8 +310,9 @@ void Menu::planet_menu(Space* planet, ship* myship) {
 }
 
 /*****************************************************************************
- *                               draw_map
- *****************************************************************************/
+                               draw_map
+Draw a map of current location and nearby planets 
+******************************************************************************/
 void Menu::draw_map(Space* planet) {
     std::cout << "----------------------------------------------------------"
               << std::endl;
@@ -322,7 +328,7 @@ void Menu::draw_map(Space* planet) {
         std::cout << std::right << std::setw(16) << " |" << std::endl;
         std::cout << std::right << std::setw(16) << " |" << std::endl;
     }
-    // if left has a planet
+    // check if left has a planet
     if (planet->get_left() != nullptr) {
         std::cout << (planet->get_left())->get_name();
         std::cout << std::left << std::setw(2) << "<--- ";

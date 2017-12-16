@@ -1,12 +1,12 @@
 /*****************************************************************************
 ** program name: Enceladus.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: a header file for class Enceladus. It inherits from the the
    Space class.
 *****************************************************************************/
-#ifndef Enceladus_hpp
-#define Enceladus_hpp
+#ifndef ENCELADUS_HPP
+#define ENCELADUS_HPP
 #include "Space.hpp"
 
 class Enceladus : public ::Space {
@@ -18,8 +18,8 @@ class Enceladus : public ::Space {
     virtual ~Enceladus();  // destructor
 
     // member functions
-    void arrive(ship*);
-    void explore(ship*);
+    void arrive(ship*) override;
+    void explore(ship*) override;
 };
 
 #endif

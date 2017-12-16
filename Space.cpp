@@ -1,7 +1,7 @@
 /*****************************************************************************
 ** program name: Space.cpp
 ** author: Wu, Ziwei
-** date: 2017-10-25
+** date: 2017-11-25
 ** description: an implementation file for class Space. It includes the
    a default constructor, a copy constructor and a destructor. It includes
    member variables name, description, fuelCost, antiParticles_available;
@@ -13,8 +13,8 @@
 #include "Space.hpp"
 
 /*****************************************************************************
- *                          Constructor
- *****************************************************************************/
+                          Constructor
+*****************************************************************************/
 Space::Space() {
     set_name("space");
     set_description("This is just a space");
@@ -29,13 +29,13 @@ Space::Space() {
 }
 
 /*****************************************************************************
- *                          Destructor
- *****************************************************************************/
+                          Destructor
+*****************************************************************************/
 Space::~Space() {}
 
 /*****************************************************************************
- *                          set functions
- *****************************************************************************/
+                          set functions
+*****************************************************************************/
 void Space::set_name(std::string n) { name = n; }
 void Space::set_description(std::string d) { description = d; }
 void Space::set_fuelcost(int fc) { fuelCost = fc; }
@@ -48,8 +48,8 @@ void Space::set_up(Space* u) { up = u; }
 void Space::set_down(Space* d) { down = d; }
 
 /*****************************************************************************
- *                          get function
- *****************************************************************************/
+                          get function
+*****************************************************************************/
 std::string Space::get_name() { return name; }
 std::string Space::get_description() { return description; }
 int Space::get_fuelcost() { return fuelCost; }

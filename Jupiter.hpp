@@ -1,12 +1,12 @@
 /*****************************************************************************
 ** program name: Jupiter.hpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-25
 ** description: a header file for class Jupiter. It inherits from the the
    Space class.
 *****************************************************************************/
-#ifndef Jupiter_hpp
-#define Jupiter_hpp
+#ifndef JUPITER_HPP
+#define JUPITER_HPP
 #include "Space.hpp"
 
 class Jupiter : public ::Space {
@@ -18,12 +18,8 @@ class Jupiter : public ::Space {
     virtual ~Jupiter();  // destructor
 
     // member functions
-    
-    // using to override derived class members
-    // source: https://stackoverflow.com/questions/6727087/c-virtual-function-being-hidden
-    
-    void arrive(ship*);
-    void explore(ship*);
+    void arrive(ship*) override;
+    void explore(ship*) override;
 };
 
 #endif

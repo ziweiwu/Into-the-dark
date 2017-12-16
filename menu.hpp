@@ -1,15 +1,16 @@
 /*****************************************************************************
 ** program name: menu.hpp
 ** author: Wu, Ziwei
-** date: 2017-10-25
-** description: a header file for class Menu. It contains a vector container
-   fighters, a constructor and a destructor. A member function fight.
+** date: 2017-11-25
+** description: a header file for class Menu. It contains a constructor and 
+    a destructor. Member variables including currentLocation, quitGame.
+    Set and get function for quitGame. Member functions including start_menu
+    planet_menu, and draw_map. 
 *****************************************************************************/
 #ifndef MENU_HPP
 #define MENU_HPP
 
 #include <iostream>
-#include <memory>
 #include <vector>
 #include "ship.hpp"
 #include "Space.hpp"
@@ -39,7 +40,6 @@ class Menu {
     // member function
     void start_menu();
     void planet_menu(Space*, ship*);
-
     void draw_map(Space*);
     
 };

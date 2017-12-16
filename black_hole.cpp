@@ -1,15 +1,15 @@
 /*****************************************************************************
 ** program name: black_hole.cpp
 ** author: Wu, Ziwei
-** date: 2017-12-22
+** date: 2017-11-22
 ** description: an implementation file for class Blackhole. It inherits from the
 the Space class.
 *****************************************************************************/
 #include "black_hole.hpp"
 
-    /*****************************************************************************
-                               Constructor
-     *****************************************************************************/
+/*****************************************************************************
+                           Constructor
+*****************************************************************************/
     Blackhole::Blackhole() {
     set_name("Black hole");
     set_description("This is a black hole");
@@ -24,20 +24,21 @@ the Space class.
 Blackhole::~Blackhole() {}
 
 /*****************************************************************************
-                           Arrive
+                           arrive
+This is the arrive event for black hole
 ******************************************************************************/
 void Blackhole::arrive(ship* myship) {
     std::cout << "----------------------------------------------------------"
               << std::endl;
-    std::cout << "Frontier is approaching blackhole. " << std::endl;
-    std::cout << "Detects an enormous gravitional wave. " << std::endl;
+    std::cout << "Frontier is approaching black hole. " << std::endl;
+    std::cout << "Detects an enormous gravitational wave. " << std::endl;
     std::cout << "Detects an enormous level of X-rays and Gamma rays." << std::endl;
     if (myship->get_antiMatter_created()) {
         std::cout<<"Anti-matter is ready to be ejected by the particle accelerator."
             <<std::endl;
     }
 
-    // The connection between blackhole and Titan is lost
+    // The connection between black hole and Titan is lost
     // once the player arrives due to strong gravity pull
     get_down()->set_up(nullptr);
     set_down(nullptr);
@@ -45,6 +46,7 @@ void Blackhole::arrive(ship* myship) {
 
 /*****************************************************************************
                            explore
+This is the explore event for black hole
 ******************************************************************************/
 void Blackhole::explore(ship* myship) {
     int choice = 0;
@@ -65,7 +67,7 @@ void Blackhole::explore(ship* myship) {
         if (choice == 1) {
             std::cout << "The ship is wrapped inside the anti-matter "
                       << std::endl;
-            std::cout << "Time and space are twisted outside of ship. Suddenly "
+            std::cout << "Time and space are twisted outside of ship. "
                       << std::endl;
             std::cout << "You don't know how long the time has passed. "
                       << std::endl;
@@ -75,9 +77,9 @@ void Blackhole::explore(ship* myship) {
                          "passed "
                       << std::endl;
             std::cout << "'Captain, Look!', you hear someone is shouting. You "
-                         "openned your eyes. "
+                         "opened your eyes. "
                       << std::endl;
-            std::cout << "Outside the cabinate window, you see patches of "
+            std::cout << "Outside the cabinet window, you see patches of "
                          "white clouds and blue sky."
                       << std::endl;
             std::cout << "You started to wonder if it all was just a dream..."
